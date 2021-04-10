@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>dotnet-Almostengr.Thermometer-AB434155-9F0A-4F56-B812-9807611D94AD</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.14"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.14"/>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="3.1.14"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Almostengr.Thermometer.Common\Almostengr.Thermometer.Common.csproj"/>
+  </ItemGroup>
+</Project>
