@@ -38,3 +38,21 @@ almostengineer@aeoffice:/tmp$ sudo   digitemp_DS9097 -a -q -c /etc/digitemp.conf
 Apr 10 13:05:42 Sensor 0 C: 29.81 F: 85.66
 almostengineer@aeoffice:/tmp$ 
 ```
+
+To be able to read the sensor data without using sudo, then you will need to add the user(s) 
+to the dialout group. 
+
+```sh
+sudo usermod -a -G dialout $USER
+```
+
+Replace "$USER" with the username(s) that need to be added to the group. May need to logout or 
+restart the system for the changes to take effect.
+
+To check to see what groups that the user has been added to, you can run the command
+
+```sh
+groups $USER
+```
+
+replacing $USER with the username that you want to see.
