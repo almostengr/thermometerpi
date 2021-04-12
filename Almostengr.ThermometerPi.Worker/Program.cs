@@ -29,7 +29,7 @@ namespace Almostengr.ThermometerPi.Worker
             //     default:
             //         break;
             // }
-            
+
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -43,7 +43,7 @@ namespace Almostengr.ThermometerPi.Worker
                     services.AddSingleton(haOptions);
 
                     services.AddHostedService<ThermometerWorker>();
-                    services.AddSingleton<IThermometerSensor, MockThermostatSensor>();
+                    services.AddSingleton<IThermometerSensor, Ds18b20FahrenheitSensor>();
                 });
     }
 }
