@@ -10,8 +10,8 @@ namespace Almostengr.ThermometerPi.Worker.Sensor
             {
                 StartInfo = new ProcessStartInfo()
                 {
-                    FileName = "/bin/bash",
-                    Arguments = string.Concat("-c \"", "digitemp_DS9097", "-a", "-q", ",-c", "/etc/digitemp.conf", "-o", "\"%s,%.2F\""),
+                    FileName = "/usr/bin/digitemp_DS9097",
+                    Arguments = $"-a -q -c /etc/digitemp.conf -o \"%s,%.2F\"",
                     RedirectStandardError = true,
                     RedirectStandardOutput = true,
                     UseShellExecute = false,
@@ -20,10 +20,9 @@ namespace Almostengr.ThermometerPi.Worker.Sensor
             };
 
             process.Start();
+            process.WaitForExit();
 
             string output = process.StandardOutput.ReadToEnd();
-
-            process.WaitForExit();
 
             return output;
         }
