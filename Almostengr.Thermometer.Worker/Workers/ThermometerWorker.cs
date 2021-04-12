@@ -74,15 +74,15 @@ namespace Almostengr.Thermometer.Worker
 
                 HttpResponseMessage response = await _httpClient.PostAsync(_haRoute, _stringContent);
 
-                var logResponse = string.Concat(response.StatusCode, response.ReasonPhrase);
                 if (response.IsSuccessStatusCode)
                 {
                     HaApiResponse haApiResponse = JsonConvert.DeserializeObject<HaApiResponse>(response.Content.ReadAsStringAsync().Result);
-                    _logger.LogInformation(logResponse);
+                    _logger.LogInformation(response.StatusCode.ToString());
+                    _logger.LogInformation("Updated: " + haApiResponse.Last_Updated.ToString());
                 }
                 else
                 {
-                    _logger.LogError(logResponse);
+                    _logger.LogError(response.StatusCode.ToString());
                 }
             }
             catch (Exception ex)
