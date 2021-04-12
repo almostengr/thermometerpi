@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Almostengr.Thermometer.Worker.Model;
+using Almostengr.Thermometer.Worker.Sensor;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -19,7 +18,12 @@ namespace Almostengr.Thermometer.Worker
                 .UseSystemd()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<TemperatureWorker>();
+                    IConfiguration configuration = hostContext.Configuration;
+                    HomeAssistant haOptions = configuration.GetSection("HomeAssistant").Get<HomeAssistant>();
+                    services.AddSingleton(haOptions);
+
+                    services.AddHostedService<ThermometerWorker>();
+                    services.AddSingleton<IThermometerSensor, MockThermostatSensor>();
                 });
     }
 }
