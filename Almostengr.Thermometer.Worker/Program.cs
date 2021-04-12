@@ -1,8 +1,10 @@
+using Almostengr.Thermometer.Worker.Console;
 using Almostengr.Thermometer.Worker.Model;
 using Almostengr.Thermometer.Worker.Sensor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Almostengr.Thermometer.Worker
 {
@@ -10,7 +12,24 @@ namespace Almostengr.Thermometer.Worker
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            // ILogger logger 
+
+            switch (args[0])
+            {
+            //     case "--installservice":
+            //         InstallServiceConsole install = new InstallServiceConsole()
+            //         install.RunInstaller();
+            //         break;
+
+            //     case "--deleteservice":
+            //         UninstallServiceConsole uninstall = new UninstallServiceConsole();
+            //         uninstall.RunUninstaller();
+            //         break;
+
+                default:
+                    CreateHostBuilder(args).Build().Run();
+                    break;
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
