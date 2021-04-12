@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "Almostengr.Thermometer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
