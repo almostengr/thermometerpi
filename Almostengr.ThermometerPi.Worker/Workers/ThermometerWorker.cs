@@ -45,6 +45,8 @@ namespace Almostengr.ThermometerPi.Worker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
+                int delayMinutes = 5;
+                
                 try
                 {
                     string result = _thermometer.GetSensorData();
@@ -52,13 +54,14 @@ namespace Almostengr.ThermometerPi.Worker
                     double temperature = ProcessSensorData(result);
 
                     PostDataToHomeAssistant(temperature);
-
-                    await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex.Message);
+                    delayMinutes = 1;
                 }
+
+                await Task.Delay(TimeSpan.FromMinutes(delayMinutes), stoppingToken);
             }
         }
 
