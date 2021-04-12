@@ -1,12 +1,12 @@
-using Almostengr.Thermometer.Worker.Console;
-using Almostengr.Thermometer.Worker.Model;
-using Almostengr.Thermometer.Worker.Sensor;
+using Almostengr.ThermometerPi.Worker.Console;
+using Almostengr.ThermometerPi.Worker.Model;
+using Almostengr.ThermometerPi.Worker.Sensor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Almostengr.Thermometer.Worker
+namespace Almostengr.ThermometerPi.Worker
 {
     public class Program
     {
@@ -14,8 +14,8 @@ namespace Almostengr.Thermometer.Worker
         {
             // ILogger logger 
 
-            switch (args[0])
-            {
+            // switch (args[0])
+            // {
             //     case "--installservice":
             //         InstallServiceConsole install = new InstallServiceConsole()
             //         install.RunInstaller();
@@ -26,10 +26,11 @@ namespace Almostengr.Thermometer.Worker
             //         uninstall.RunUninstaller();
             //         break;
 
-                default:
-                    CreateHostBuilder(args).Build().Run();
-                    break;
-            }
+            //     default:
+            //         break;
+            // }
+            
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -6,8 +6,8 @@ Documentation=https://github.com/almostengr/thermometerpi
 [Service]
 Type=simple
 Restart=always
-ExecStart=/usr/lib/thermometerpi/thermometerpi
-User=<iamuser>
+ExecStart=/usr/lib/thermometerpi/Almostengr.ThermometerPi.Worker
+User=osmc
 
 [Install]
 WantedBy=multi-user.target

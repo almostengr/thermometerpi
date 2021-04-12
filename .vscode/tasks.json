@@ -27,13 +27,40 @@
             "args": [
                 "run",
                 "--project",
-                "Almostengr.Thermometer.Worker/"
+                "Almostengr.ThermometerPi.Worker/"
             ],
             "group": "build",
             "presentation": {
                 "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Deploy ThermometerPi",
+            "command": "/bin/bash",
+            "type": "shell",
+            "args": [
+                "-c",
+                "\"",
+                "dotnet",
+                "publish",
+                "-r",
+                "linux-arm",
+                "-c",
+                "Release",
+                "&&",
+                // "scp",
+                // "-p",
+                // "${workspaceRoot}/Almostengr.ThermometerPi.Worker/appsettings.Development.json",
+                // "osmc@osmc://usr/lib/thermometerpi/appsettings.json",
+                // "&&",
+                "scp",
+                "-pr",
+                "${workspaceRoot}/Almostengr.ThermometerPi.Worker/bin/Release/netcoreapp3.1/linux-arm/*",
+                "osmc@osmc://usr/lib/thermometerpi/",
+                "\""
+            ],
+            "group": "build"
         }
     ]
 }

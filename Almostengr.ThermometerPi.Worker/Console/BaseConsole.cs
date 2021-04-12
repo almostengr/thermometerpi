@@ -1,4 +1,4 @@
-namespace Almostengr.Thermometer.Worker.Console
+namespace Almostengr.ThermometerPi.Worker.Console
 {
     public abstract class BaseConsole
     {

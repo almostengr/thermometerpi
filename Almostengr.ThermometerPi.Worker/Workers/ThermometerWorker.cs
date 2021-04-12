@@ -4,14 +4,14 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Almostengr.Thermometer.Worker.DataTransfer;
-using Almostengr.Thermometer.Worker.Sensor;
+using Almostengr.ThermometerPi.Worker.DataTransfer;
+using Almostengr.ThermometerPi.Worker.Sensor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Almostengr.Thermometer.Worker
+namespace Almostengr.ThermometerPi.Worker
 {
     public class ThermometerWorker : BackgroundService
     {

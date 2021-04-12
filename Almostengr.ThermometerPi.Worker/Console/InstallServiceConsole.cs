@@ -2,30 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using Microsoft.Extensions.Logging;
 
-namespace Almostengr.Thermometer.Worker.Console
+namespace Almostengr.ThermometerPi.Worker.Console
 {
-    public class UninstallServiceConsole : BaseConsole
+    public class InstallServiceConsole : BaseConsole
     {
-        private readonly ILogger<UninstallServiceConsole> _logger;
+        private readonly ILogger<InstallServiceConsole> _logger;
 
-        public UninstallServiceConsole(ILogger<UninstallServiceConsole> logger)
+        public InstallServiceConsole()
+        {
+        }
+
+        public InstallServiceConsole(ILogger<InstallServiceConsole> logger)
         {
             _logger = logger;
         }
 
-        public void RunUninstaller()
+        public void RunInstaller()
         {
             try
             {
+                _logger.LogInformation("Installing service");
+
                 IList commands = new List<string>();
                 commands.Add("sudo /bin/systemctl status falconpimonitor");
-                commands.Add("sudo /bin/systemctl stop falconpimonitor");
-                commands.Add("sudo /bin/systemctl disable falconpimonitor");
-                commands.Add("sudo /bin/systemctl status falconpimonitor");
                 commands.Add("sudo /bin/systemctl daemon-reload");
+                commands.Add("sudo /bin/systemctl enable falconpimonitor");
+                commands.Add("sudo /bin/systemctl start falconpimonitor");
+                commands.Add("sudo /bin/systemctl status falconpimonitor");
 
                 foreach (var command in commands)
                 {
@@ -43,18 +48,17 @@ namespace Almostengr.Thermometer.Worker.Console
                     };
 
                     _logger.LogInformation($"{command}");
+
                     process.Start();
 
                     string result = process.StandardOutput.ReadToEnd();
 
                     process.WaitForExit();
+
                     _logger.LogInformation(result);
+
+                    _logger.LogInformation("Done installing service");
                 }
-
-                _logger.LogInformation("Removing service file");
-                File.Delete(string.Concat(SystemdDirectory, "/", ServiceFilename));
-
-                _logger.LogInformation("Done uninstalling service");
             }
             catch (Exception ex)
             {

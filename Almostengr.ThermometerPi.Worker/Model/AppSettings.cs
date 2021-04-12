@@ -1,4 +1,4 @@
-namespace Almostengr.Thermometer.Worker.Model
+namespace Almostengr.ThermometerPi.Worker.Model
 {
     public class AppSettings
     {

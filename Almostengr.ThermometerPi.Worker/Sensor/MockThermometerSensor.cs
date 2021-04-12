@@ -1,6 +1,6 @@
 using System;
 
-namespace Almostengr.Thermometer.Worker.Sensor
+namespace Almostengr.ThermometerPi.Worker.Sensor
 {
     public class MockThermostatSensor : IThermometerSensor
     {

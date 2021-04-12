@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Almostengr.Thermometer.Worker.Sensor
+namespace Almostengr.ThermometerPi.Worker.Sensor
 {
     public class Ds18b20FahrenheitSensor : IThermometerSensor
     {

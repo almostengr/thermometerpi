@@ -1,4 +1,4 @@
-namespace Almostengr.Thermometer.Worker.Sensor
+namespace Almostengr.ThermometerPi.Worker.Sensor
 {
     public interface IThermometerSensor
     {

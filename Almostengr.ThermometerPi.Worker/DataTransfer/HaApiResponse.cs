@@ -1,6 +1,6 @@
 using System;
 
-namespace Almostengr.Thermometer.Worker.DataTransfer
+namespace Almostengr.ThermometerPi.Worker.DataTransfer
 {
     public class HaApiResponse
     {
