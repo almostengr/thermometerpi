@@ -1,6 +1,8 @@
 # Thermometer Pi
 
-Thermometer that reads the current temperature for a DS18S20. This is an application created on .NET Core 3.1.
+This project uses a Raspberry Pi to send data to Home Assistant to control window air conditioner units.
+Thermometer that reads the current temperature for a DS18S20. This is an application created on .NET Core 3.1
+with C#.
 
 ## Getting Temperature
 
