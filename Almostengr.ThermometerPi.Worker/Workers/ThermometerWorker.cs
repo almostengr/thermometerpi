@@ -46,10 +46,12 @@ namespace Almostengr.ThermometerPi.Worker
             while (!stoppingToken.IsCancellationRequested)
             {
                 int delayMinutes = 5;
-                
+
                 try
                 {
                     string result = _thermometer.GetSensorData();
+
+                    _logger.LogInformation("Temp: " + result);
 
                     double temperature = ProcessSensorData(result);
 
@@ -57,7 +59,7 @@ namespace Almostengr.ThermometerPi.Worker
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex.Message);
+                    _logger.LogError(ex, ex.Message);
                     delayMinutes = 1;
                 }
 
@@ -90,7 +92,7 @@ namespace Almostengr.ThermometerPi.Worker
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message);
+                _logger.LogError(ex, ex.Message);
             }
 
             if (_stringContent != null)
