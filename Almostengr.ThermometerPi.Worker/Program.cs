@@ -1,10 +1,8 @@
-using Almostengr.ThermometerPi.Worker.Console;
 using Almostengr.ThermometerPi.Worker.Model;
 using Almostengr.ThermometerPi.Worker.Sensor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Almostengr.ThermometerPi.Worker
 {
@@ -12,24 +10,6 @@ namespace Almostengr.ThermometerPi.Worker
     {
         public static void Main(string[] args)
         {
-            // ILogger logger 
-
-            // switch (args[0])
-            // {
-            //     case "--installservice":
-            //         InstallServiceConsole install = new InstallServiceConsole()
-            //         install.RunInstaller();
-            //         break;
-
-            //     case "--deleteservice":
-            //         UninstallServiceConsole uninstall = new UninstallServiceConsole();
-            //         uninstall.RunUninstaller();
-            //         break;
-
-            //     default:
-            //         break;
-            // }
-
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -44,6 +24,7 @@ namespace Almostengr.ThermometerPi.Worker
 
                     services.AddHostedService<ThermometerWorker>();
                     services.AddSingleton<IThermometerSensor, Ds18b20FahrenheitSensor>();
+                    // services.AddSingleton<IThermometerSensor, MockThermostatSensor>();
                 });
     }
 }

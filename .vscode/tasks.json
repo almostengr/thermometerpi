@@ -61,7 +61,7 @@
                 // "&&",
                 "scp",
                 "-pr",
-                "${workspaceRoot}/Almostengr.ThermometerPi.Worker/bin/Release/netcoreapp3.1/linux-arm/*",
+                "${workspaceRoot}/Almostengr.ThermometerPi.Worker/bin/Release/net5.0/linux-arm/*",
                 "osmc@osmc://usr/lib/thermometerpi/",
                 "\""
             ],

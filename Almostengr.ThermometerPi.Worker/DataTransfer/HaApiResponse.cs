@@ -1,5 +1,3 @@
-using System;
-
 namespace Almostengr.ThermometerPi.Worker.DataTransfer
 {
     public class HaApiResponse

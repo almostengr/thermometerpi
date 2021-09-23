@@ -7,7 +7,7 @@ namespace Almostengr.ThermometerPi.Worker.Sensor
         public string GetSensorData()
         {
             Random random = new Random();
-            double randTemperature = random.Next(32,100);
+            double randTemperature = random.Next(79,100);
             return $"0,{randTemperature}";
         }
     }

@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Almostengr.ThermometerPi.Worker/bin/Debug/netcoreapp3.1/Almostengr.ThermometerPi.Worker.dll",
+            "program": "${workspaceFolder}/Almostengr.ThermometerPi.Worker/bin/Debug/net5.0/Almostengr.ThermometerPi.Worker.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Almostengr.ThermometerPi.Worker",
             "console": "internalConsole",
