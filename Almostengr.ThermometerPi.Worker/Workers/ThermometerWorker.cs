@@ -18,7 +18,6 @@ namespace Almostengr.ThermometerPi.Worker
         private readonly ILogger<ThermometerWorker> _logger;
         private readonly IConfiguration _configuration;
         private HttpClient _httpClient;
-        private StringContent _stringContent;
         private readonly IThermometerSensor _thermometer;
         private string _haUrl;
         public string _haRoute;
@@ -94,9 +93,6 @@ namespace Almostengr.ThermometerPi.Worker
             {
                 _logger.LogError(ex, ex.Message);
             }
-
-            if (_stringContent != null)
-                _stringContent.Dispose();
         }
 
         private double ProcessSensorData(string result)
@@ -108,7 +104,6 @@ namespace Almostengr.ThermometerPi.Worker
         public override Task StopAsync(CancellationToken cancellationToken)
         {
             _httpClient.Dispose();
-            _stringContent.Dispose();
             return base.StopAsync(cancellationToken);
         }
     }
