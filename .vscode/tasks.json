@@ -14,58 +14,14 @@
                 // Do not generate summary otherwise it leads to duplicate errors in Problems panel
                 "/consoleloggerparameters:NoSummary"
             ],
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "presentation": {
                 "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "run",
-            "command": "dotnet",
-            "type": "shell",
-            "args": [
-                "run",
-                "--project",
-                "Almostengr.ThermometerPi.Worker/"
-            ],
-            "group": "build",
-            "presentation": {
-                "reveal": "silent"
-            },
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Deploy ThermometerPi",
-            "command": "/bin/bash",
-            "type": "shell",
-            "args": [
-                "-c",
-                "\"",
-                "dotnet",
-                "clean",
-                "-c",
-                "Release",
-                "&&",
-                "dotnet",
-                "publish",
-                "-r",
-                "linux-arm",
-                "-c",
-                "Release",
-                "&&",
-                // "scp",
-                // "-p",
-                // "${workspaceRoot}/Almostengr.ThermometerPi.Worker/appsettings.Development.json",
-                // "osmc@osmc://usr/lib/thermometerpi/appsettings.json",
-                // "&&",
-                "scp",
-                "-pr",
-                "${workspaceRoot}/Almostengr.ThermometerPi.Worker/bin/Release/net5.0/linux-arm/*",
-                "osmc@osmc://usr/lib/thermometerpi/",
-                "\""
-            ],
-            "group": "build"
         }
     ]
 }

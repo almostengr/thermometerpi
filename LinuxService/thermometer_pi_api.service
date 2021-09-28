@@ -1,12 +1,12 @@
 [Unit]
-Description=Thermometer Pi
+Description=Thermometer Pi API
 After=network.target
 Documentation=https://github.com/almostengr/thermometerpi
 
 [Service]
 Type=simple
 Restart=always
-ExecStart=/usr/lib/thermometerpi/Almostengr.ThermometerPi.Worker
+ExecStart=/home/osmc/thermometerpi/Almostengr.ThermometerPi.Api
 User=osmc
 
 [Install]
