@@ -1,3 +1,4 @@
+using System;
 using Almostengr.ThermometerPi.Api.DataTransferObject;
 using Almostengr.ThermometerPi.Api.Sensors;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,9 @@ namespace Almostengr.ThermometerPi.Api.Controllers
         public ThermometerDto GetThermometer()
         {
             var dataReading = _sensor.GetSensorData();
+
+            _logger.LogInformation($"At {DateTime.Now} temperature is {dataReading}");
+
             return new ThermometerDto(dataReading);
         }
     }
