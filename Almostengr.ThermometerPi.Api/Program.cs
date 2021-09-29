@@ -18,7 +18,9 @@ namespace Almostengr.ThermometerPi.Api
                         System.Reflection.Assembly.GetExecutingAssembly().Location))
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                        .UseStartup<Startup>()
+                        .UseUrls("http://*:8005");
                 });
     }
 }
