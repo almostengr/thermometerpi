@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almostengr.Thermometer.Api", "Almostengr.ThermometerPi.Api\Almostengr.Thermometer.Api.csproj", "{0A85E9DF-B18B-4FFC-9775-85479D58F050}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Almostengr.ThermometerPi.Api", "Almostengr.ThermometerPi.Api\Almostengr.ThermometerPi.Api.csproj", "{0A85E9DF-B18B-4FFC-9775-85479D58F050}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
