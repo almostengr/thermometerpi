@@ -22,6 +22,58 @@
                 "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/Almostengr.ThermometerPi.Api/Almostengr.ThermometerPi.Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Clean Release Project",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "clean",
+                "-c",
+                "Release",
+            ],
+            "group": "none"
+        },
+        {
+            "label": "Publish Release",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "publish",
+                "-r",
+                "linux-arm",
+                "-c",
+                "Release",
+                "*sln"
+            ],
+            "group": "none",
+            "dependsOn": ["Clean Release Project"]
+        },
+        {
+            "label": "Deploy ThermometerPi",
+            "command": "scp",
+            "type": "shell",
+            "args": [
+                "-pr",
+                "${workspaceRoot}/LinuxService/thermometerapi.service",
+                "${workspaceRoot}/Almostengr.ThermometerPi.Api/bin/Release/net5.0/linux-arm/*",
+                "osmc@osmc://home/osmc/thermometerpi/",
+            ],
+            "group": "none",
+            "dependsOn": ["Publish Release"],
         }
     ]
 }
