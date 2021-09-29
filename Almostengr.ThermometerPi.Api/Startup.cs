@@ -26,8 +26,8 @@ namespace Almostengr.ThermometerPi.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Almostengr.ThermometerPi.Api", Version = "v1" });
             });
 
-            // services.AddSingleton<IThermometerSensor, Ds18b20Sensor>();
-            services.AddSingleton<IThermometerSensor, MockThermometerSensor>();
+            services.AddSingleton<IThermometerSensor, Ds18b20Sensor>();
+            // services.AddSingleton<IThermometerSensor, MockThermometerSensor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
