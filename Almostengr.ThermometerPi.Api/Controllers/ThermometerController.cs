@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 namespace Almostengr.ThermometerPi.Api.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class ThermometerController : ControllerBase
     {
         private readonly ILogger<ThermometerController> _logger;
-        private readonly IThermometerSensor _sensor;
+        private readonly ITemperatureSensor _sensor;
 
-        public ThermometerController(ILogger<ThermometerController> logger, IThermometerSensor sensor)
+        public ThermometerController(ILogger<ThermometerController> logger, ITemperatureSensor sensor)
         {
             _logger = logger;
             _sensor = sensor;

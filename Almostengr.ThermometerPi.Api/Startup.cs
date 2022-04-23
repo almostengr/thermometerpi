@@ -26,7 +26,7 @@ namespace Almostengr.ThermometerPi.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Almostengr.ThermometerPi.Api", Version = "v1" });
             });
 
-            services.AddSingleton<IThermometerSensor, Ds18b20Sensor>();
+            services.AddSingleton<ITemperatureSensor, Ds18b20Sensor>();
             // services.AddSingleton<IThermometerSensor, MockThermometerSensor>();
         }
 

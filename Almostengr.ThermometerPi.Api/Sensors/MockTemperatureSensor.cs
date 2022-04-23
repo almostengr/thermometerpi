@@ -2,7 +2,7 @@ using System;
 
 namespace Almostengr.ThermometerPi.Api.Sensors
 {
-    public class MockThermometerSensor : IThermometerSensor
+    public class MockThermometerSensor : ITemperatureSensor
     {
         public string GetSensorData()
         {

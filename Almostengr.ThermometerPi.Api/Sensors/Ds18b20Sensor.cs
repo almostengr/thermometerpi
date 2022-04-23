@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace Almostengr.ThermometerPi.Api.Sensors
 {
-    public class Ds18b20Sensor : IThermometerSensor
+    public class Ds18b20Sensor : ITemperatureSensor
     {
         public string GetSensorData()
         {

@@ -1,6 +1,6 @@
 namespace Almostengr.ThermometerPi.Api.Sensors
 {
-    public interface IThermometerSensor
+    public interface ITemperatureSensor
     {
         string GetSensorData();
     }
