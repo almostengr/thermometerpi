@@ -27,8 +27,13 @@ namespace Almostengr.ThermometerPi.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Almostengr.ThermometerPi.Api", Version = "v1" });
             });
 
-            services.AddSingleton<ITemperatureService, MockTemperatureService>();
-            services.AddSingleton<ILcdService, MockLcdService>();
+            # if RELEASE
+                services.AddSingleton<ITemperatureService, Ds18b20Service>();
+                services.AddSingleton<ILcdService, LcdService>();
+            # else
+                services.AddSingleton<ITemperatureService, MockTemperatureService>();
+                services.AddSingleton<ILcdService, MockLcdService>();
+            # endif
 
             services.AddHostedService<LcdDisplayWorker>();
         }
