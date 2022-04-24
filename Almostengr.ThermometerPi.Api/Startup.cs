@@ -1,4 +1,5 @@
 using Almostengr.ThermometerPi.Api.Sensors;
+using Almostengr.ThermometerPi.Api.Workers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,8 @@ namespace Almostengr.ThermometerPi.Api
 
             services.AddSingleton<ITemperatureSensor, Ds18b20Sensor>();
             // services.AddSingleton<IThermometerSensor, MockThermometerSensor>();
+
+            services.AddSingleton<LcdDisplayWorker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
