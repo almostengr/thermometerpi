@@ -1,4 +1,4 @@
-namespace Almostengr.ThermometerPi.Api.Common
+namespace Almostengr.ThermometerPi.Api.Constants
 {
     public sealed class TemperatureSource
     {
