@@ -63,7 +63,7 @@
             "dependsOn": ["Clean Release Project"]
         },
         {
-            "label": "Deploy ThermometerPi",
+            "label": "Deploy Local",
             "command": "scp",
             "type": "shell",
             "args": [
@@ -74,6 +74,32 @@
             ],
             "group": "none",
             "dependsOn": ["Publish Release"],
+        },
+        {
+            "label": "Package TAR Release",
+            "command": "tar",
+            "type": "shell",
+            "args": [
+                "-czvf",
+                "${workspaceRoot}/Almostengr.ThermometerPi.Api.tar.gz",
+                "-C",
+                "${workspaceRoot}/Almostengr.ThermometerPi.Api/bin/Release/net5.0/linux-arm/publish",
+                "."
+            ],
+            "dependsOn": ["Publish Release"],
+        },
+        {
+            "label": "Tag Release",
+            "command" : "git",
+            "type": "shell",
+            "args": [
+                "tag",
+                "-a",
+                "\"v$(date +%Y.%m.%d)\"",
+                "-m",
+                "\"version $(date +%Y.%m.%d)\""
+            ],
+            "dependsOn": ["Package Release"],
         }
     ]
 }
