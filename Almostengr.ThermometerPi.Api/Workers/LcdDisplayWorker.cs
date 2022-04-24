@@ -3,7 +3,7 @@ using System.Device.Gpio;
 using System.Device.I2c;
 using System.Threading;
 using System.Threading.Tasks;
-using Almostengr.ThermometerPi.Api.Sensors;
+using Almostengr.ThermometerPi.Api.Services;
 using Iot.Device.CharacterLcd;
 using Iot.Device.Pcx857x;
 using Microsoft.Extensions.Hosting;
@@ -14,9 +14,9 @@ namespace Almostengr.ThermometerPi.Api.Workers
     {
         private const int TOP_LINE = 0;
         private const int BOTTOM_LINE = 1;
-        private readonly ITemperatureSensor _temperatureSensor;
+        private readonly ITemperatureService _temperatureSensor;
 
-        public LcdDisplayWorker(ITemperatureSensor temperatureSensor)
+        public LcdDisplayWorker(ITemperatureService temperatureSensor)
         {
             _temperatureSensor = temperatureSensor;
         }

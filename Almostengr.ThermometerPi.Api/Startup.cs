@@ -1,4 +1,4 @@
-using Almostengr.ThermometerPi.Api.Sensors;
+using Almostengr.ThermometerPi.Api.Services;
 using Almostengr.ThermometerPi.Api.Workers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,8 +27,8 @@ namespace Almostengr.ThermometerPi.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Almostengr.ThermometerPi.Api", Version = "v1" });
             });
 
-            services.AddSingleton<ITemperatureSensor, Ds18b20Sensor>();
-            // services.AddSingleton<IThermometerSensor, MockThermometerSensor>();
+            services.AddSingleton<ITemperatureService, Ds18b20Service>();
+            // services.AddSingleton<IThermometerSensor, MockTemperatureService>();
 
             services.AddSingleton<LcdDisplayWorker>();
         }

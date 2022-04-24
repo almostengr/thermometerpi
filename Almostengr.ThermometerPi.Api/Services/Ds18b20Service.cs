@@ -1,8 +1,8 @@
 using System.Diagnostics;
 
-namespace Almostengr.ThermometerPi.Api.Sensors
+namespace Almostengr.ThermometerPi.Api.Services
 {
-    public class Ds18b20Sensor : ITemperatureSensor
+    public class Ds18b20Service : ITemperatureService
     {
         public string GetSensorData()
         {

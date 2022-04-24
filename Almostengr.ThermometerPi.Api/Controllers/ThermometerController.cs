@@ -1,6 +1,6 @@
 using System;
 using Almostengr.ThermometerPi.Api.DataTransferObject;
-using Almostengr.ThermometerPi.Api.Sensors;
+using Almostengr.ThermometerPi.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -11,9 +11,9 @@ namespace Almostengr.ThermometerPi.Api.Controllers
     public class ThermometerController : ControllerBase
     {
         private readonly ILogger<ThermometerController> _logger;
-        private readonly ITemperatureSensor _sensor;
+        private readonly ITemperatureService _sensor;
 
-        public ThermometerController(ILogger<ThermometerController> logger, ITemperatureSensor sensor)
+        public ThermometerController(ILogger<ThermometerController> logger, ITemperatureService sensor)
         {
             _logger = logger;
             _sensor = sensor;
