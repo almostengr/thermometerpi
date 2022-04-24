@@ -17,7 +17,3 @@ outlets.
 Visit the project page at https://thealmostengineer.com/thermometerpi
 
 Business inquiries https://rhtservices.net
-
-## Additional Resources
-
-https://martybugs.net/electronics/tempsensor/usb.cgi
