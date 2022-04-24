@@ -20,13 +20,13 @@ namespace Almostengr.ThermometerPi.Api.Controllers
         }
 
         [HttpGet]
-        public ThermometerDto GetThermometer()
+        public TemperatureDto GetThermometer()
         {
             var dataReading = _sensor.GetSensorData();
 
             _logger.LogInformation($"At {DateTime.Now} temperature is {dataReading}");
 
-            return new ThermometerDto(dataReading);
+            return new TemperatureDto(dataReading);
         }
     }
 }

@@ -2,9 +2,9 @@ using System;
 
 namespace Almostengr.ThermometerPi.Api.DataTransferObject
 {
-    public class ThermometerDto
+    public class TemperatureDto
     {
-        public ThermometerDto(string output)
+        public TemperatureDto(string output)
         {
             output = output.Replace("\n", string.Empty);
             var parts = output.Split(',');
