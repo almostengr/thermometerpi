@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Almostengr.ThermometerPi.Api.Common;
+using Almostengr.ThermometerPi.Api.Constants;
 using Almostengr.ThermometerPi.Api.DataTransferObject;
 using Almostengr.ThermometerPi.Api.Models;
 using Microsoft.EntityFrameworkCore;

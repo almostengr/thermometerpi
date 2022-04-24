@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Almostengr.ThermometerPi.Api.Common;
+using Almostengr.ThermometerPi.Api.Constants;
 using Almostengr.ThermometerPi.Api.Database;
 using Almostengr.ThermometerPi.Api.DataTransferObject;
 using Almostengr.ThermometerPi.Api.Models;
