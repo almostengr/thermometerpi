@@ -4,15 +4,13 @@ namespace Almostengr.ThermometerPi.Api.DataTransferObject
 {
     public class TemperatureDto
     {
-        public TemperatureDto(string output)
+        public TemperatureDto(int fahrenheit, int celsius)
         {
-            output = output.Replace("\n", string.Empty);
-            var parts = output.Split(',');
-            this.Fahrenheit = Double.Parse(parts[0]);
-            this.Celsius = Double.Parse(parts[1]);
+            this.Fahrenheit = fahrenheit;
+            this.Celsius = celsius;
         }
 
-        public double Fahrenheit { get; set; }
-        public double Celsius { get; set; }
+        public int Fahrenheit { get; set; }
+        public int Celsius { get; set; }
     }
 }

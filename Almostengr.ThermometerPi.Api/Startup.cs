@@ -1,11 +1,14 @@
+using Almostengr.ThermometerPi.Api.Clients;
+using Almostengr.ThermometerPi.Api.Database;
 using Almostengr.ThermometerPi.Api.Services;
-using Almostengr.ThermometerPi.Api.Workers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Almostengr.ThermometerPi.Api.Workers;
 
 namespace Almostengr.ThermometerPi.Api
 {
@@ -27,15 +30,23 @@ namespace Almostengr.ThermometerPi.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Almostengr.ThermometerPi.Api", Version = "v1" });
             });
 
+            services.AddDbContext<ApiDbContext>(options => options.UseInMemoryDatabase("ThermometerPi"));
+            services.AddScoped<ITemperatureRepository, TemperatureRepository>();
+            services.AddScoped<ITemperatureReadingService, TemperatureReadingService>();
+
             # if RELEASE
-                services.AddSingleton<ITemperatureService, Ds18b20Service>();
-                services.AddSingleton<ILcdService, LcdService>();
+                services.AddScoped<ISensorService, Ds18b20Service>();
+                services.AddScoped<ILcdService, LcdService>();
+                services.AddScoped<INwsClient, NwsClient>();
             # else
-                services.AddSingleton<ITemperatureService, MockTemperatureService>();
-                services.AddSingleton<ILcdService, MockLcdService>();
+                services.AddScoped<ISensorService, MockSensorService>();
+                services.AddScoped<ILcdService, MockLcdService>();
+                services.AddScoped<INwsClient, MockNwsClient>();
             # endif
 
-            services.AddHostedService<LcdDisplayWorker>();
+            // services.AddHostedService<LcdDisplayWorker>();
+            services.AddHostedService<InteriorLatestWorker>();
+            // services.AddHostedService<NwsLatestWorker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

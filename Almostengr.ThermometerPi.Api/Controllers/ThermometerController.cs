@@ -1,5 +1,4 @@
-using System;
-using Almostengr.ThermometerPi.Api.DataTransferObject;
+using System.Threading.Tasks;
 using Almostengr.ThermometerPi.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,22 +10,34 @@ namespace Almostengr.ThermometerPi.Api.Controllers
     public class ThermometerController : ControllerBase
     {
         private readonly ILogger<ThermometerController> _logger;
-        private readonly ITemperatureService _sensor;
+        private readonly ITemperatureReadingService _temperatureReadingService;
 
-        public ThermometerController(ILogger<ThermometerController> logger, ITemperatureService sensor)
+        public ThermometerController(ILogger<ThermometerController> logger,
+            ITemperatureReadingService temperatureReadingService)
         {
             _logger = logger;
-            _sensor = sensor;
+            _temperatureReadingService = temperatureReadingService;
         }
 
         [HttpGet]
-        public TemperatureDto GetThermometer()
+        public async Task<IActionResult> GetThermometer()
         {
-            var dataReading = _sensor.GetSensorData();
-
-            _logger.LogInformation($"At {DateTime.Now} temperature is {dataReading}");
-
-            return new TemperatureDto(dataReading);
+            return await GetLatestInteriorTemperature();
         }
+
+        [HttpGet]
+        [Route("exterior")]
+        public async Task<IActionResult> GetLatestExteriorTemperature()
+        {
+            return Ok(await _temperatureReadingService.GetLatestExteriorReadingAsync());
+        }
+
+        [HttpGet]
+        [Route("interior")]
+        public async Task<IActionResult> GetLatestInteriorTemperature()
+        {
+            return Ok(await _temperatureReadingService.GetLatestInteriorReadingAsync());
+        }
+
     }
 }
