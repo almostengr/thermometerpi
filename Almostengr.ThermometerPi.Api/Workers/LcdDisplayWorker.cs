@@ -50,13 +50,15 @@ namespace Almostengr.ThermometerPi.Api.Workers
 
                 if (interiorTemp != null)
                 {
-                    output += $"{interiorTemp.Fahrenheit.ToString()}F  {interiorTemp.Celsius.ToString()}C";
+                    output += $"In: {interiorTemp.Fahrenheit.ToString()}F ";
                 }
 
                 if (exteriorTemp != null)
                 {
-                    output += $"E: {exteriorTemp.Fahrenheit.ToString()}F";
+                    output += $"Out: {exteriorTemp.Fahrenheit.ToString()}F";
                 }
+
+                output = output.Length < 1 ? "No Data" : output;
 
                 lcd.Write(output);
 
