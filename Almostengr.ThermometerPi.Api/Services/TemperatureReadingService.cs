@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Almostengr.ThermometerPi.Api.Constants;
 using Almostengr.ThermometerPi.Api.Database;
@@ -47,6 +48,11 @@ namespace Almostengr.ThermometerPi.Api.Services
         {
             await _repository.DeleteOldReadingsAsync();
             await _repository.SaveChangesAsync();
+        }
+
+        public async Task<List<TemperatureDto>> GetAllReadingsAsync()
+        {
+            return await _repository.GetAllReadingsAsync();
         }
     }
 }

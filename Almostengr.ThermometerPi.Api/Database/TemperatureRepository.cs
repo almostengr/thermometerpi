@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Almostengr.ThermometerPi.Api.Constants;
@@ -30,7 +31,7 @@ namespace Almostengr.ThermometerPi.Api.Database
         public async Task<TemperatureDto> GetLatestExteriorReadingAsync()
         {
             return await _dbContext.TemperatureReadings
-                .Where(r => r.Source == TemperatureSource.Exterior)
+                .Where(r => r.Source == TemperatureSource.Exterior && r.Timestamp >= DateTime.Now.AddHours(-2))
                 .OrderByDescending(r => r.Timestamp)
                 .Select(t => t.AsDto())
                 .FirstOrDefaultAsync();
@@ -39,7 +40,7 @@ namespace Almostengr.ThermometerPi.Api.Database
         public async Task<TemperatureDto> GetLatestInteriorReadingAsync()
         {
             return await _dbContext.TemperatureReadings
-                .Where(r => r.Source == TemperatureSource.Interior)
+                .Where(r => r.Source == TemperatureSource.Interior && r.Timestamp >= DateTime.Now.AddHours(-2))
                 .OrderByDescending(r => r.Timestamp)
                 .Select(t => t.AsDto())
                 .FirstOrDefaultAsync();
@@ -53,6 +54,14 @@ namespace Almostengr.ThermometerPi.Api.Database
             
             _dbContext.TemperatureReadings.RemoveRange(readings);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<TemperatureDto>> GetAllReadingsAsync()
+        {
+            return await _dbContext.TemperatureReadings
+                .OrderByDescending(r => r.Timestamp)
+                .Select(t => t.AsDto())
+                .ToListAsync();
         }
     }
 }

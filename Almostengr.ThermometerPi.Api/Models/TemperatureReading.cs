@@ -21,7 +21,7 @@ namespace Almostengr.ThermometerPi.Api.Models
 
         internal TemperatureDto AsDto()
         {
-            return new TemperatureDto(this.TemperatureF, this.TemperatureC);
+            return new TemperatureDto(this.TemperatureF, this.TemperatureC, this.Source, this.Timestamp);
         }
     }
 }

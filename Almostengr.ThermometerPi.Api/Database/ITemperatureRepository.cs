@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Almostengr.ThermometerPi.Api.DataTransferObject;
 using Almostengr.ThermometerPi.Api.Models;
@@ -11,5 +12,6 @@ namespace Almostengr.ThermometerPi.Api.Database
         Task AddReadingAsync(TemperatureReading reading);
         Task DeleteOldReadingsAsync();
         Task SaveChangesAsync();
+        Task<List<TemperatureDto>> GetAllReadingsAsync();
     }
 }

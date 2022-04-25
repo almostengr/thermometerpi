@@ -28,9 +28,8 @@ namespace Almostengr.ThermometerPi.Api.Workers
             while (!stoppingToken.IsCancellationRequested)
             {
                 NwsLatestObservationDto observationDto = await _nwsClient.GetLatestWeatherObservationAsync();
-                await _temperatureReadingService.AddReadingAsync(observationDto);
-
                 _logger.LogInformation($"Exterior Temperature: {observationDto.Properties.Temperature.Value}C");
+                await _temperatureReadingService.AddReadingAsync(observationDto);
 
                 await Task.Delay(TimeSpan.FromMinutes(30), stoppingToken);
             }
