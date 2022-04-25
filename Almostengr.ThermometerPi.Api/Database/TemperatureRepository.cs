@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Almostengr.ThermometerPi.Api.Constants;
@@ -26,11 +27,6 @@ namespace Almostengr.ThermometerPi.Api.Database
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task<TemperatureReading> DeleteReadingAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task<TemperatureDto> GetLatestExteriorReadingAsync()
         {
             return await _dbContext.TemperatureReadings
@@ -49,5 +45,14 @@ namespace Almostengr.ThermometerPi.Api.Database
                 .FirstOrDefaultAsync();
         }
 
+        public async Task DeleteOldReadingsAsync()
+        {
+            var readings = await _dbContext.TemperatureReadings
+                .Where(r => r.Timestamp < DateTime.Now.AddDays(-1))
+                .ToListAsync();
+            
+            _dbContext.TemperatureReadings.RemoveRange(readings);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

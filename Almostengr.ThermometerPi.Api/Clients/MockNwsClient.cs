@@ -7,7 +7,7 @@ namespace Almostengr.ThermometerPi.Api.Clients
 {
     public class MockNwsClient : BaseClient, INwsClient
     {
-        public MockNwsClient(ILogger<BaseClient> logger) : base(logger)
+        public MockNwsClient(ILogger<MockNwsClient> logger) : base(logger)
         {
         }
 

@@ -38,15 +38,17 @@ namespace Almostengr.ThermometerPi.Api
                 services.AddScoped<ISensorService, Ds18b20Service>();
                 services.AddScoped<ILcdService, LcdService>();
                 services.AddScoped<INwsClient, NwsClient>();
+                services.AddHostedService<LcdDisplayWorker>();
             # else
                 services.AddScoped<ISensorService, MockSensorService>();
                 services.AddScoped<ILcdService, MockLcdService>();
+                // services.AddScoped<INwsClient, NwsClient>();
                 services.AddScoped<INwsClient, MockNwsClient>();
             # endif
 
-            // services.AddHostedService<LcdDisplayWorker>();
             services.AddHostedService<InteriorLatestWorker>();
             // services.AddHostedService<NwsLatestWorker>();
+            services.AddHostedService<DbMaintenanceWorker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

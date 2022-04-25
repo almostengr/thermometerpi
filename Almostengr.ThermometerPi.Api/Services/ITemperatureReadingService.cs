@@ -9,5 +9,6 @@ namespace Almostengr.ThermometerPi.Api.Services
         Task AddReadingAsync(Ds18b20Dto observationDto);
         Task<TemperatureDto> GetLatestExteriorReadingAsync();
         Task<TemperatureDto> GetLatestInteriorReadingAsync();
+        Task DeleteOldReadingsAsync();
     }
 }

@@ -9,7 +9,7 @@ namespace Almostengr.ThermometerPi.Api.Clients
     {
         private readonly HttpClient _httpClient;
 
-        public NwsClient(ILogger<BaseClient> logger) : base(logger)
+        public NwsClient(ILogger<NwsClient> logger) : base(logger)
         {
             _httpClient = new HttpClient();
         }

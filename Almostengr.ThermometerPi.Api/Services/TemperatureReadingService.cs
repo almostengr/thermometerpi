@@ -42,5 +42,11 @@ namespace Almostengr.ThermometerPi.Api.Services
         {
             return await _repository.GetLatestInteriorReadingAsync();
         }
+
+        public async Task DeleteOldReadingsAsync()
+        {
+            await _repository.DeleteOldReadingsAsync();
+            await _repository.SaveChangesAsync();
+        }
     }
 }
