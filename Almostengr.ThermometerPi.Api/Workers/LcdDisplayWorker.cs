@@ -63,7 +63,7 @@ namespace Almostengr.ThermometerPi.Api.Workers
                 lcd.SetCursorPosition(0, 1);
                 lcd.Write(DateTime.Now.ToString("ddd MM/dd") + " " + DateTime.Now.ToShortTimeString());
 
-                await Task.Delay(TimeSpan.FromSeconds(60), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
             }
         }
 
