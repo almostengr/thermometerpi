@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Almostengr.ThermometerPi.Api.Constants;
 using Almostengr.ThermometerPi.Api.Database;
 using Almostengr.ThermometerPi.Api.DataTransferObject;
+using Almostengr.ThermometerPi.Api.Enums;
 using Almostengr.ThermometerPi.Api.Models;
 
 namespace Almostengr.ThermometerPi.Api.Services
