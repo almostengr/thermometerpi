@@ -1,5 +1,4 @@
 using System;
-using Almostengr.ThermometerPi.Api.Constants;
 
 namespace Almostengr.ThermometerPi.Api.DataTransferObject
 {

@@ -36,7 +36,6 @@ namespace Almostengr.ThermometerPi.Api
 
             # if RELEASE
                 services.AddScoped<ISensorService, Ds18b20Service>();
-                services.AddScoped<ILcdService, LcdService>();
                 services.AddScoped<INwsClient, NwsClient>();
                 services.AddHostedService<LcdDisplayWorker>();
             # else
@@ -45,7 +44,6 @@ namespace Almostengr.ThermometerPi.Api
             # endif
 
             services.AddHostedService<InteriorLatestWorker>();
-            // services.AddHostedService<NwsLatestWorker>();
             services.AddHostedService<DbMaintenanceWorker>();
         }
 

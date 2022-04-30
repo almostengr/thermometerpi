@@ -38,23 +38,15 @@ namespace Almostengr.ThermometerPi.Api.Workers
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                TemperatureDto exteriorTemp = await _temperatureReadingService.GetLatestExteriorReadingAsync();
                 TemperatureDto interiorTemp = await _temperatureReadingService.GetLatestInteriorReadingAsync();
 
                 lcd.Clear();
                 string output = string.Empty;
 
-                if (interiorTemp != null)
-                {
-                    output += $"In: {interiorTemp.Fahrenheit.ToString()}F ";
-                }
-
-                if (exteriorTemp != null)
-                {
-                    output += $"Out: {exteriorTemp.Fahrenheit.ToString()}F";
-                }
-
-                DisplayLcdText(output);
+                DisplayLcdText(
+                    interiorTemp != null ? $"In: {interiorTemp.Fahrenheit.ToString()}F" : "No Data",
+                    DateTime.Now.ToString("ddd MM/dd HH:mm")
+                );
 
                 await Task.Delay(TimeSpan.FromSeconds(DelaySeconds), stoppingToken);
 
@@ -63,29 +55,22 @@ namespace Almostengr.ThermometerPi.Api.Workers
 
                 output = string.Empty;
 
-                if (minInteriorTemp != null)
-                {
-                    output = $"Min: {minInteriorTemp.Fahrenheit.ToString()}F ";
-                }
-
-                if (maxInteriorTemp != null)
-                {
-                    output += $"Max: {maxInteriorTemp.Fahrenheit.ToString()}F";
-                }
-
-                DisplayLcdText(output);
+                DisplayLcdText(
+                    minInteriorTemp != null ? $"Min: {minInteriorTemp.Fahrenheit.ToString()}F" : string.Empty,
+                    maxInteriorTemp != null ? $"Max: {maxInteriorTemp.Fahrenheit.ToString()}F" : string.Empty
+                );
 
                 await Task.Delay(TimeSpan.FromSeconds(DelaySeconds), stoppingToken);
             }
         }
 
-        private void DisplayLcdText(string line1 = "No data")
+        private void DisplayLcdText(string line1 = "No data", string line2 = "")
         {
             lcd.Clear();
             lcd.SetCursorPosition(0, 0);
             lcd.Write(line1);
             lcd.SetCursorPosition(0, 1);
-            lcd.Write(DateTime.Now.ToString("ddd MM/dd HH:mm"));
+            lcd.Write(line2);
         }
 
     } // end class 
