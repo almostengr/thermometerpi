@@ -44,7 +44,9 @@ namespace Almostengr.ThermometerPi.Api.Workers
                 string output = string.Empty;
 
                 DisplayLcdText(
-                    interiorTemp != null ? $"In: {interiorTemp.Fahrenheit.ToString()}F" : "No Data",
+                    interiorTemp != null ? 
+                        $"In: {interiorTemp.Fahrenheit.ToString()}F {interiorTemp.Celsius.ToString()}C" : 
+                        "No Data",   
                     DateTime.Now.ToString("ddd MM/dd HH:mm")
                 );
 
@@ -56,8 +58,12 @@ namespace Almostengr.ThermometerPi.Api.Workers
                 output = string.Empty;
 
                 DisplayLcdText(
-                    minInteriorTemp != null ? $"Min: {minInteriorTemp.Fahrenheit.ToString()}F" : string.Empty,
-                    maxInteriorTemp != null ? $"Max: {maxInteriorTemp.Fahrenheit.ToString()}F" : string.Empty
+                    minInteriorTemp != null ? 
+                        $"Min: {minInteriorTemp.Fahrenheit.ToString()}F {minInteriorTemp.Celsius.ToString()}C" : 
+                        string.Empty,
+                    maxInteriorTemp != null ? 
+                        $"Max: {maxInteriorTemp.Fahrenheit.ToString()}F {maxInteriorTemp.Celsius.ToString()}C" : 
+                        string.Empty
                 );
 
                 await Task.Delay(TimeSpan.FromSeconds(DelaySeconds), stoppingToken);
