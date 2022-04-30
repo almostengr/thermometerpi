@@ -41,12 +41,11 @@ namespace Almostengr.ThermometerPi.Api
                 services.AddHostedService<LcdDisplayWorker>();
             # else
                 services.AddScoped<ISensorService, MockSensorService>();
-                services.AddScoped<ILcdService, MockLcdService>();
                 services.AddScoped<INwsClient, MockNwsClient>();
             # endif
 
             services.AddHostedService<InteriorLatestWorker>();
-            services.AddHostedService<NwsLatestWorker>();
+            // services.AddHostedService<NwsLatestWorker>();
             services.AddHostedService<DbMaintenanceWorker>();
         }
 

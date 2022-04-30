@@ -22,7 +22,7 @@ namespace Almostengr.ThermometerPi.Api.Database
         {
             await _dbContext.TemperatureReadings.AddAsync(reading);
         }
-        
+
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
@@ -51,7 +51,7 @@ namespace Almostengr.ThermometerPi.Api.Database
             var readings = await _dbContext.TemperatureReadings
                 .Where(r => r.Timestamp < DateTime.Now.AddDays(-1))
                 .ToListAsync();
-            
+
             _dbContext.TemperatureReadings.RemoveRange(readings);
             await _dbContext.SaveChangesAsync();
         }
@@ -62,6 +62,24 @@ namespace Almostengr.ThermometerPi.Api.Database
                 .OrderByDescending(r => r.Timestamp)
                 .Select(t => t.AsDto())
                 .ToListAsync();
+        }
+
+        public async Task<TemperatureDto> GetMinInteriorReadingAsync()
+        {
+            return await _dbContext.TemperatureReadings
+                .Where(r => r.Source == TemperatureSource.Interior)
+                .OrderBy(r => r.TemperatureF)
+                .Select(t => t.AsDto())
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<TemperatureDto> GetMaxInteriorReadingAsync()
+        {
+            return await _dbContext.TemperatureReadings
+                .Where(r => r.Source == TemperatureSource.Interior)
+                .OrderByDescending(r => r.TemperatureF)
+                .Select(t => t.AsDto())
+                .FirstOrDefaultAsync();
         }
     }
 }

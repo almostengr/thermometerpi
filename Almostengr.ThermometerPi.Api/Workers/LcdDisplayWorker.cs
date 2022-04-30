@@ -5,7 +5,6 @@ using Almostengr.ThermometerPi.Api.Services;
 using Microsoft.Extensions.Hosting;
 using Almostengr.ThermometerPi.Api.DataTransferObject;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System.Device.Gpio;
 using System.Device.I2c;
 using Iot.Device.Pcx857x;
@@ -15,15 +14,13 @@ namespace Almostengr.ThermometerPi.Api.Workers
 {
     public class LcdDisplayWorker : BackgroundService
     {
-        private readonly ILogger<LcdDisplayWorker> _logger;
         private readonly ITemperatureReadingService _temperatureReadingService;
-        // private readonly ILcdService _lcdService;
+        private const int DelaySeconds = 5;
+        private Lcd1602 lcd;
 
-        public LcdDisplayWorker(IServiceScopeFactory factory, ILogger<LcdDisplayWorker> logger)
+        public LcdDisplayWorker(IServiceScopeFactory factory)
         {
-            _logger = logger;
             _temperatureReadingService = factory.CreateScope().ServiceProvider.GetRequiredService<ITemperatureReadingService>();
-            // _lcdService = factory.CreateScope().ServiceProvider.GetRequiredService<ILcdService>();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -31,7 +28,7 @@ namespace Almostengr.ThermometerPi.Api.Workers
             using I2cDevice i2c = I2cDevice.Create(new I2cConnectionSettings(1, 0x27));
             using Pcf8574 driver = new Pcf8574(i2c);
 
-            var lcd = new Lcd1602(registerSelectPin: 0,
+            lcd = new Lcd1602(registerSelectPin: 0,
                     enablePin: 2,
                     dataPins: new int[] { 4, 5, 6, 7 },
                     backlightPin: 3,
@@ -45,7 +42,6 @@ namespace Almostengr.ThermometerPi.Api.Workers
                 TemperatureDto interiorTemp = await _temperatureReadingService.GetLatestInteriorReadingAsync();
 
                 lcd.Clear();
-                lcd.SetCursorPosition(0, 0);
                 string output = string.Empty;
 
                 if (interiorTemp != null)
@@ -58,15 +54,38 @@ namespace Almostengr.ThermometerPi.Api.Workers
                     output += $"Out: {exteriorTemp.Fahrenheit.ToString()}F";
                 }
 
-                output = output.Length < 1 ? "No Data" : output;
+                DisplayLcdText(output);
 
-                lcd.Write(output);
+                await Task.Delay(TimeSpan.FromSeconds(DelaySeconds), stoppingToken);
 
-                lcd.SetCursorPosition(0, 1);
-                lcd.Write(DateTime.Now.ToString("ddd MM/dd") + " " + DateTime.Now.ToShortTimeString());
+                TemperatureDto minInteriorTemp = await _temperatureReadingService.GetMinInteriorReadingAsync();
+                TemperatureDto maxInteriorTemp = await _temperatureReadingService.GetMaxInteriorReadingAsync();
 
-                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
+                output = string.Empty;
+
+                if (minInteriorTemp != null)
+                {
+                    output = $"Min: {minInteriorTemp.Fahrenheit.ToString()}F ";
+                }
+
+                if (maxInteriorTemp != null)
+                {
+                    output += $"Max: {maxInteriorTemp.Fahrenheit.ToString()}F";
+                }
+
+                DisplayLcdText(output);
+
+                await Task.Delay(TimeSpan.FromSeconds(DelaySeconds), stoppingToken);
             }
+        }
+
+        private void DisplayLcdText(string line1 = "No data")
+        {
+            lcd.Clear();
+            lcd.SetCursorPosition(0, 0);
+            lcd.Write(line1);
+            lcd.SetCursorPosition(0, 1);
+            lcd.Write(DateTime.Now.ToString("ddd MM/dd HH:mm"));
         }
 
     } // end class 

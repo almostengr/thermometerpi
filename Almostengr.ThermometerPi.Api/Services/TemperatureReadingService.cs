@@ -54,5 +54,15 @@ namespace Almostengr.ThermometerPi.Api.Services
         {
             return await _repository.GetAllReadingsAsync();
         }
+
+        public async Task<TemperatureDto> GetMaxInteriorReadingAsync()
+        {
+            return await _repository.GetMaxInteriorReadingAsync();
+        }
+
+        public async Task<TemperatureDto> GetMinInteriorReadingAsync()
+        {
+            return await _repository.GetMinInteriorReadingAsync();
+        }
     }
 }

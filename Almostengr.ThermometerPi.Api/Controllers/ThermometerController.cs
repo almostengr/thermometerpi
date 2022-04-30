@@ -46,5 +46,19 @@ namespace Almostengr.ThermometerPi.Api.Controllers
             return Ok(await _temperatureReadingService.GetAllReadingsAsync());
         }
 
+        [HttpGet]
+        [Route("interior/max")]
+        public async Task<IActionResult> GetMaxInteriorTemperature()
+        {
+            return Ok(await _temperatureReadingService.GetMaxInteriorReadingAsync());
+        }
+        
+        [HttpGet]
+        [Route("interior/min")]
+        public async Task<IActionResult> GetMinInteriorTemperature()
+        {
+            return Ok(await _temperatureReadingService.GetMinInteriorReadingAsync());
+        }
+
     }
 }

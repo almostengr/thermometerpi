@@ -11,7 +11,6 @@ namespace Almostengr.ThermometerPi.Api.Workers
     {
         private readonly ITemperatureReadingService _temperatureReadingService;
 
-        // public DbMaintenanceWorker(ITemperatureReadingService temperatureReadingService)
         public DbMaintenanceWorker(IServiceScopeFactory factory)
         {
             _temperatureReadingService = factory.CreateScope().ServiceProvider.GetRequiredService<ITemperatureReadingService>();

@@ -13,5 +13,7 @@ namespace Almostengr.ThermometerPi.Api.Database
         Task DeleteOldReadingsAsync();
         Task SaveChangesAsync();
         Task<List<TemperatureDto>> GetAllReadingsAsync();
+        Task<TemperatureDto> GetMinInteriorReadingAsync();
+        Task<TemperatureDto> GetMaxInteriorReadingAsync();
     }
 }
