@@ -6,6 +6,9 @@ namespace Almostengr.ThermometerPi.Api.Models
 {
     public class TemperatureReading
     {
+        public TemperatureReading()
+        { }
+
         public TemperatureReading(int temperatureC, TemperatureSource source)
         {
             this.TemperatureC = temperatureC;
