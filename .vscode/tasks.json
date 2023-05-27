@@ -37,17 +37,6 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Clean Release Project",
-            "command": "dotnet",
-            "type": "shell",
-            "args": [
-                "clean",
-                "-c",
-                "Release",
-            ],
-            "group": "none"
-        },
-        {
             "label": "Publish Release",
             "command": "dotnet",
             "type": "shell",
@@ -60,33 +49,20 @@
                 "*sln"
             ],
             "group": "none",
-            "dependsOn": ["Clean Release Project"]
+            "dependsOn": ["build"]
         },
         {
-            "label": "Deploy Local",
+            "label": "Deploy Production",
             "command": "scp",
             "type": "shell",
             "args": [
                 "-pr",
                 "${workspaceRoot}/LinuxService/thermometerapi.service",
-                "${workspaceRoot}/Almostengr.ThermometerPi.Api/bin/Release/net5.0/linux-arm/publish/*",
-                "iamadmin@192.168.1.125://home/iamadmin/thermometerpi/",
+                "${workspaceRoot}/Almostengr.ThermometerPi.Api/bin/Release/net6.0/linux-arm/publish/*",
+                "iamadmin@192.168.1.100://home/iamadmin/thermometerpi/",
             ],
             "group": "none",
-            "dependsOn": ["Publish Release"],
-        },
-        {
-            "label": "Package TAR Release",
-            "command": "tar",
-            "type": "shell",
-            "args": [
-                "-czvf",
-                "${workspaceRoot}/Almostengr.ThermometerPi.Api.tar.gz",
-                "-C",
-                "${workspaceRoot}/Almostengr.ThermometerPi.Api/bin/Release/net5.0/linux-arm/publish",
-                "."
-            ],
-            "dependsOn": ["Publish Release"],
+            "dependsOn": ["Tag Release"],
         },
         {
             "label": "Tag Release",
@@ -95,11 +71,11 @@
             "args": [
                 "tag",
                 "-a",
-                "\"v$(date +%Y.%m.%d)\"",
+                "\"v5.$(date +%Y.%m.%d)\"",
                 "-m",
-                "\"version $(date +%Y.%m.%d)\""
+                "\"version 5.$(date +%Y.%m.%d)\""
             ],
-            "dependsOn": ["Package Release"],
+            "dependsOn": ["Publish Release"],
         }
     ]
 }
